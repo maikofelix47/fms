@@ -6,9 +6,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <Navbar />
-      {children}
-    </section>
+    <section className="flex justify-center px-10 py-10">{children}</section>
   );
 }
