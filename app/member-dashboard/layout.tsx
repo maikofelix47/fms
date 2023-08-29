@@ -8,7 +8,7 @@ export default function DashboardLayout({
   return (
     <section>
       <Navbar />
-      {children}
+      <div className="content flex px-10 py-10">{children}</div>
     </section>
   );
 }
