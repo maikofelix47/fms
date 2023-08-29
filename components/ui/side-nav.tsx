@@ -15,6 +15,53 @@ const sideNavItems = [
         title: "Deposits",
         url: "deposits",
       },
+      {
+        title: "Interest Income",
+        url: "interest-income",
+      },
+    ],
+  },
+  {
+    section: "Loans",
+    navItems: [
+      {
+        title: "Apply",
+        url: "apply-loan",
+      },
+      {
+        title: "Active",
+        url: "active-loans",
+      },
+      {
+        title: "Closed",
+        url: "closed-loans",
+      },
+    ],
+  },
+  {
+    section: "Payments",
+    navItems: [
+      {
+        title: "Debits",
+        url: "apply-loan",
+      },
+      {
+        title: "Credits",
+        url: "active-loans",
+      },
+    ],
+  },
+  {
+    section: "Knowledge Base",
+    navItems: [
+      {
+        title: "Loan Calculator",
+        url: "loan-calculator",
+      },
+      {
+        title: "FAQ",
+        url: "faq",
+      },
     ],
   },
 ];
@@ -35,7 +82,9 @@ function SideNav() {
                       key={index}
                       className="side-nav-item px-2 py-1 hover:underline"
                     >
-                      <Link href={`/${item.url}`}>{item.title}</Link>
+                      <Link href={`member-dashboard/${item.url}`}>
+                        {item.title}
+                      </Link>
                     </li>
                   );
                 })}
