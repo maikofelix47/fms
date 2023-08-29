@@ -13,7 +13,7 @@ export default function DashboardLayout({
         <div className="side-nav w-1/5 px-3">
           <SideNav />
         </div>
-        <div className="main-content">{children}</div>
+        <div className="main-content w-4/5">{children}</div>
       </div>
     </section>
   );
