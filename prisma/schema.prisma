@@ -119,3 +119,27 @@ model Share {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model InterestType {
+  id          Int           @id @default(autoincrement())
+  name        String        @db.Char(20)
+  description String        @db.Char(100)
+  voided      Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  LoanProduct LoanProduct[]
+}
+
+model LoanProduct {
+  id             Int          @id @default(autoincrement())
+  name           String       @db.VarChar(20)
+  interestType   InterestType @relation(fields: [interestTypeId], references: [id])
+  interestTypeId Int
+  minAmount      Int
+  maxAmount      Int
+  minTenor       Int
+  maxTenor       Int
+  interestRate   Decimal      @db.Decimal(2, 2)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
