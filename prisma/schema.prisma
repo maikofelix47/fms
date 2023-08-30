@@ -65,6 +65,7 @@ model Member {
   MemberContactDetail  MemberContactDetail[]
   MemberPersonalDetail MemberPersonalDetail[]
   Deposit              Deposit[]
+  Share                Share[]
 }
 
 model MemberContactDetail {
@@ -98,6 +99,17 @@ model MemberPersonalDetail {
 }
 
 model Deposit {
+  id        Int      @id @default(autoincrement())
+  member    Member   @relation(fields: [memberId], references: [id])
+  memberId  Int
+  amount    Decimal  @db.Money
+  datePaid  DateTime
+  voided    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Share {
   id        Int      @id @default(autoincrement())
   member    Member   @relation(fields: [memberId], references: [id])
   memberId  Int
