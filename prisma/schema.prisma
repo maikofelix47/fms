@@ -54,15 +54,16 @@ model MembershipApplication {
 }
 
 model Member {
-  id                  Int                   @id @default(autoincrement())
-  isActive            Boolean               @default(true)
-  joinDate            DateTime              @default(now())
-  exitDate            DateTime
-  exitReason          String                @db.VarChar(255)
-  voided              Boolean               @default(false)
-  createdAt           DateTime              @default(now())
-  updatedAt           DateTime              @updatedAt
-  MemberContactDetail MemberContactDetail[]
+  id                   Int                    @id @default(autoincrement())
+  isActive             Boolean                @default(true)
+  joinDate             DateTime               @default(now())
+  exitDate             DateTime
+  exitReason           String                 @db.VarChar(255)
+  voided               Boolean                @default(false)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  MemberContactDetail  MemberContactDetail[]
+  MemberPersonalDetail MemberPersonalDetail[]
 }
 
 model MemberContactDetail {
@@ -77,4 +78,20 @@ model MemberContactDetail {
   voided             Boolean  @default(false)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+}
+
+model MemberPersonalDetail {
+  id            Int      @id @default(autoincrement())
+  member        Member   @relation(fields: [memberId], references: [id])
+  memberId      Int
+  firstName     String   @db.VarChar(15)
+  lastName      String   @db.VarChar(15)
+  nationalIdNo  Int
+  nationality   String
+  dob           DateTime
+  gender        String   @db.VarChar(1)
+  maritalStatus String
+  voided        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
