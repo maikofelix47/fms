@@ -66,6 +66,8 @@ model Member {
   MemberPersonalDetail MemberPersonalDetail[]
   Deposit              Deposit[]
   Share                Share[]
+  LoanApplication      LoanApplication[]
+  Loan                 Loan[]
 }
 
 model MemberContactDetail {
@@ -131,15 +133,47 @@ model InterestType {
 }
 
 model LoanProduct {
-  id             Int          @id @default(autoincrement())
-  name           String       @db.VarChar(20)
-  interestType   InterestType @relation(fields: [interestTypeId], references: [id])
-  interestTypeId Int
-  minAmount      Int
-  maxAmount      Int
-  minTenor       Int
-  maxTenor       Int
-  interestRate   Decimal      @db.Decimal(2, 2)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(20)
+  interestType    InterestType      @relation(fields: [interestTypeId], references: [id])
+  interestTypeId  Int
+  minAmount       Int
+  maxAmount       Int
+  minTenor        Int
+  maxTenor        Int
+  interestRate    Decimal           @db.Decimal(2, 2)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  LoanApplication LoanApplication[]
+  Loan            Loan[]
+}
+
+model LoanApplication {
+  id            Int         @id @default(autoincrement())
+  member        Member      @relation(fields: [memberId], references: [id])
+  memberId      Int
+  loanProduct   LoanProduct @relation(fields: [loanProductId], references: [id])
+  loanProductId Int
+  amount        Decimal     @db.Decimal(10, 2)
+  tenorInMonths Int         @db.SmallInt
+  status        Int         @db.SmallInt
+  voided        Boolean     @default(false)
+  voidReason    String      @db.VarChar(100)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Loan {
+  id            Int         @id @default(autoincrement())
+  member        Member      @relation(fields: [memberId], references: [id])
+  memberId      Int
+  loanProduct   LoanProduct @relation(fields: [loanProductId], references: [id])
+  loanProductId Int
+  amount        Decimal     @db.Decimal(10, 2)
+  tenorInMonths Int         @db.SmallInt
+  status        Int         @db.SmallInt
+  voided        Boolean     @default(false)
+  voidReason    String      @db.VarChar(100)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }
