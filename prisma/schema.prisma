@@ -64,6 +64,7 @@ model Member {
   updatedAt            DateTime               @updatedAt
   MemberContactDetail  MemberContactDetail[]
   MemberPersonalDetail MemberPersonalDetail[]
+  Deposit              Deposit[]
 }
 
 model MemberContactDetail {
@@ -94,4 +95,15 @@ model MemberPersonalDetail {
   voided        Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model Deposit {
+  id        Int      @id @default(autoincrement())
+  member    Member   @relation(fields: [memberId], references: [id])
+  memberId  Int
+  amount    Decimal  @db.Money
+  datePaid  DateTime
+  voided    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
