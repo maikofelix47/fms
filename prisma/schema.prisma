@@ -9,3 +9,46 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Test {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id               Int      @id @default(autoincrement())
+  password         String
+  email            String   @unique
+  passwordAttempts Int      @default(3)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model MembershipApplication {
+  id                 Int      @id @default(autoincrement())
+  status             Int      @db.SmallInt
+  firstName          String   @db.VarChar(15)
+  lastName           String   @db.VarChar(15)
+  nationalIdNo       Int
+  nationality        String
+  dob                DateTime
+  gender             String   @db.VarChar(1)
+  maritalStatus      String
+  phoneNo            String
+  countryOfResidence String
+  countyOfResidence  String
+  estate             String
+  houseNo            String
+  employed           Boolean
+  selfEmployer       Boolean
+  employer           String
+  dateOfEmployment   DateTime
+  station            String
+  jobTitle           String
+  grossMonthlyIncome Int
+  voided             Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
