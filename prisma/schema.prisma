@@ -17,15 +17,18 @@ model Test {
 }
 
 model User {
-  id               Int       @id @default(autoincrement())
+  id               Int              @id @default(autoincrement())
   password         String
-  email            String    @unique
-  passwordAttempts Int       @default(3)
-  isActive         Boolean   @default(true)
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
+  email            String           @unique
+  passwordAttempts Int              @default(3)
+  isActive         Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
   Member           Member[]
   Payment          Payment[]
+  DepositPayment   DepositPayment[]
+  LoanPayment      LoanPayment[]
+  SharesPayment    SharesPayment[]
 }
 
 model MembershipApplication {
@@ -194,17 +197,59 @@ model PaymentMethod {
 }
 
 model Payment {
-  id              Int           @id @default(autoincrement())
-  amount          Decimal       @db.Decimal(10, 2)
+  id              Int              @id @default(autoincrement())
+  amount          Decimal          @db.Decimal(10, 2)
   transactionCode String
   description     String
-  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  paymentMethod   PaymentMethod    @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId Int
   memberUserId    Int
-  user            User          @relation(fields: [memberUserId], references: [id])
+  user            User             @relation(fields: [memberUserId], references: [id])
   createdBy       Int
-  voided          Boolean       @default(false)
-  voidReason      String        @db.VarChar(100)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  voided          Boolean          @default(false)
+  voidReason      String           @db.VarChar(100)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  DepositPayment  DepositPayment[]
+  LoanPayment     LoanPayment[]
+  SharesPayment   SharesPayment[]
+}
+
+model DepositPayment {
+  id         Int      @id @default(autoincrement())
+  amount     Decimal  @db.Decimal(10, 2)
+  paymentId  Int
+  payment    Payment  @relation(fields: [paymentId], references: [id])
+  createdBy  Int
+  user       User     @relation(fields: [createdBy], references: [id])
+  voided     Boolean  @default(false)
+  voidReason String   @db.VarChar(100)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model LoanPayment {
+  id         Int      @id @default(autoincrement())
+  amount     Decimal  @db.Decimal(10, 2)
+  paymentId  Int
+  payment    Payment  @relation(fields: [paymentId], references: [id])
+  createdBy  Int
+  user       User     @relation(fields: [createdBy], references: [id])
+  voided     Boolean  @default(false)
+  voidReason String   @db.VarChar(100)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SharesPayment {
+  id         Int      @id @default(autoincrement())
+  amount     Decimal  @db.Decimal(10, 2)
+  paymentId  Int
+  payment    Payment  @relation(fields: [paymentId], references: [id])
+  createdBy  Int
+  user       User     @relation(fields: [createdBy], references: [id])
+  voided     Boolean  @default(false)
+  voidReason String   @db.VarChar(100)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
