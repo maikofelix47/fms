@@ -17,13 +17,15 @@ model Test {
 }
 
 model User {
-  id               Int      @id @default(autoincrement())
+  id               Int       @id @default(autoincrement())
   password         String
-  email            String   @unique
-  passwordAttempts Int      @default(3)
-  isActive         Boolean  @default(true)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  email            String    @unique
+  passwordAttempts Int       @default(3)
+  isActive         Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  Member           Member[]
+  Payment          Payment[]
 }
 
 model MembershipApplication {
@@ -55,6 +57,8 @@ model MembershipApplication {
 
 model Member {
   id                   Int                    @id @default(autoincrement())
+  userId               Int
+  user                 User                   @relation(fields: [id], references: [id])
   isActive             Boolean                @default(true)
   joinDate             DateTime               @default(now())
   exitDate             DateTime
@@ -176,4 +180,31 @@ model Loan {
   voidReason    String      @db.VarChar(100)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
+}
+
+model PaymentMethod {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(20)
+  description String
+  voided      Boolean   @default(false)
+  voidReason  String    @db.VarChar(100)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Payment     Payment[]
+}
+
+model Payment {
+  id              Int           @id @default(autoincrement())
+  amount          Decimal       @db.Decimal(10, 2)
+  transactionCode String
+  description     String
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId Int
+  memberUserId    Int
+  user            User          @relation(fields: [memberUserId], references: [id])
+  createdBy       Int
+  voided          Boolean       @default(false)
+  voidReason      String        @db.VarChar(100)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
