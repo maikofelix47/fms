@@ -26,7 +26,7 @@ const sideNavItems = [
     navItems: [
       {
         title: "Apply",
-        url: "apply-loan",
+        url: "loan/apply",
       },
       {
         title: "Active",
@@ -86,9 +86,7 @@ function SideNav() {
                       key={index}
                       className="side-nav-item px-2 py-1 hover:underline"
                     >
-                      <Link href={`member-dashboard/${item.url}`}>
-                        {item.title}
-                      </Link>
+                      <Link href={`${item.url}`}>{item.title}</Link>
                     </li>
                   );
                 })}

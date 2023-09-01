@@ -4,6 +4,7 @@ import prisma from "@/app/lib/prisma";
 export async function GET(req: Request) {
   const products = await prisma.loanProduct.findMany({
     select: {
+      id: true,
       name: true,
       minAmount: true,
       maxAmount: true,
