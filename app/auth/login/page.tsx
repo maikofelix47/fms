@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { login } from "@/app/services/auth.service";
 
 export default function Login() {
   const formSchema = z.object({
@@ -30,6 +31,17 @@ export default function Login() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("form submitted", values);
+    userLogin(values.email, values.password);
+  }
+
+  async function userLogin(email: string, password: string) {
+    const payload = {
+      email,
+      password,
+    };
+
+    const resp = await login(payload);
+    console.log("loginResp", resp);
   }
 
   return (

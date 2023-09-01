@@ -148,7 +148,7 @@ model LoanProduct {
   maxAmount       Int
   minTenor        Int
   maxTenor        Int
-  interestRate    Decimal           @db.Decimal(2, 2)
+  interestRate    Decimal           @db.Decimal(4, 2)
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   LoanApplication LoanApplication[]

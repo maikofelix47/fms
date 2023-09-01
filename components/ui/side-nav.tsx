@@ -36,6 +36,10 @@ const sideNavItems = [
         title: "Closed",
         url: "closed-loans",
       },
+      {
+        title: "Loan Products",
+        url: "loan-products",
+      },
     ],
   },
   {
