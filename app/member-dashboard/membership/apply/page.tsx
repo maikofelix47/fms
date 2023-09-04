@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import {
   Form,
   FormField,
@@ -9,7 +8,6 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FmsPageHeader } from "@/components/fms-page-header";
 import { FmsSelect } from "@/components/fms-select";
+import { apply } from "@/app/services/membership.service";
 function MembershipApplicationPage() {
   const formSchema = z.object({
     firstName: z.string().min(1),
@@ -138,6 +137,16 @@ function MembershipApplicationPage() {
 
   function submitHandler(values: z.infer<typeof formSchema>) {
     console.log("form submitted", values);
+    applyForMembership(values);
+  }
+  function applyForMembership(payload: any) {
+    apply(payload)
+      .then((result) => {
+        console.log("result", result);
+      })
+      .catch((err) => {
+        console.error("error", err);
+      });
   }
   function errorHandler(e: any) {
     console.log("errorHandler", e);

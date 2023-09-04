@@ -17,22 +17,25 @@ model Test {
 }
 
 model User {
-  id               Int              @id @default(autoincrement())
-  password         String
-  email            String           @unique
-  passwordAttempts Int              @default(3)
-  isActive         Boolean          @default(true)
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
-  Member           Member[]
-  Payment          Payment[]
-  DepositPayment   DepositPayment[]
-  LoanPayment      LoanPayment[]
-  SharesPayment    SharesPayment[]
+  id                    Int                     @id @default(autoincrement())
+  password              String
+  email                 String                  @unique
+  passwordAttempts      Int                     @default(3)
+  isActive              Boolean                 @default(true)
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  Member                Member[]
+  Payment               Payment[]
+  DepositPayment        DepositPayment[]
+  LoanPayment           LoanPayment[]
+  SharesPayment         SharesPayment[]
+  MembershipApplication MembershipApplication[]
 }
 
 model MembershipApplication {
   id                 Int      @id @default(autoincrement())
+  userId             Int
+  user               User     @relation(fields: [userId], references: [id])
   status             Int      @db.SmallInt
   firstName          String   @db.VarChar(15)
   lastName           String   @db.VarChar(15)
