@@ -2,7 +2,12 @@ import Link from "next/link";
 const sideNavItems = [
   {
     section: "Membership",
+    sectionUrl: "membership",
     navItems: [
+      {
+        title: "Apply",
+        url: "apply",
+      },
       {
         title: "Shares",
         url: "shares",
@@ -23,10 +28,11 @@ const sideNavItems = [
   },
   {
     section: "Loans",
+    sectionUrl: "loan",
     navItems: [
       {
         title: "Apply",
-        url: "loan/apply",
+        url: "apply",
       },
       {
         title: "Active",
@@ -44,6 +50,7 @@ const sideNavItems = [
   },
   {
     section: "Payments",
+    sectionUrl: "payments",
     navItems: [
       {
         title: "Debits",
@@ -57,6 +64,7 @@ const sideNavItems = [
   },
   {
     section: "Knowledge Base",
+    sectionUrl: "knowledge-base",
     navItems: [
       {
         title: "Loan Calculator",
@@ -86,7 +94,11 @@ function SideNav() {
                       key={index}
                       className="side-nav-item px-2 py-1 hover:underline"
                     >
-                      <Link href={`${item.url}`}>{item.title}</Link>
+                      <Link
+                        href={`/member-dashboard/${s.sectionUrl}/${item.url}`}
+                      >
+                        {item.title}
+                      </Link>
                     </li>
                   );
                 })}

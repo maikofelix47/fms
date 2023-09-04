@@ -29,7 +29,7 @@ export const FmsSelect = ({
   return (
     <Select onValueChange={onValueChange} defaultValue={defaultValue}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Theme" />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
         {options.map((o, index) => {
