@@ -29,10 +29,12 @@ export async function POST(req: Request) {
       }
     );
   } else {
+    const userRoles = await getUserRoles(user.id);
     return new NextResponse(
       JSON.stringify({
         success: true,
         message: "Suucessfull Login",
+        data: userRoles,
       }),
       {
         status: 200,
@@ -54,4 +56,29 @@ async function getUser(email: string) {
 async function isPasswordAmatch(userPassword: string, dbPassword: string) {
   const match = await bcrypt.compare(userPassword, dbPassword);
   return match;
+}
+
+async function getUserRoles(userId: number) {
+  const userRoles = await prisma.userRole.findMany({
+    where: {
+      userId: userId,
+    },
+    select: {
+      role: {
+        select: {
+          name: true,
+          RolePrivilege: {
+            select: {
+              privilege: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+  return userRoles;
 }
