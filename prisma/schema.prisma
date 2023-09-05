@@ -30,6 +30,7 @@ model User {
   LoanPayment           LoanPayment[]
   SharesPayment         SharesPayment[]
   MembershipApplication MembershipApplication[]
+  UserRole              UserRole[]
 }
 
 model MembershipApplication {
@@ -265,6 +266,7 @@ model Role {
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   RolePrivilege RolePrivilege[]
+  UserRole      UserRole[]
 }
 
 model Privilege {
@@ -288,4 +290,16 @@ model RolePrivilege {
   voidReason  String    @db.VarChar(100)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+}
+
+model UserRole {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  roleId     Int
+  role       Role     @relation(fields: [roleId], references: [id])
+  voided     Boolean  @default(false)
+  voidReason String   @db.VarChar(100)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
