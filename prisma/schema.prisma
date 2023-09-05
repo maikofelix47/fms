@@ -169,7 +169,7 @@ model LoanApplication {
   tenorInMonths Int         @db.SmallInt
   status        Int         @db.SmallInt
   voided        Boolean     @default(false)
-  voidReason    String      @db.VarChar(100)
+  voidReason    String?     @db.VarChar(100)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
@@ -184,7 +184,7 @@ model Loan {
   tenorInMonths Int         @db.SmallInt
   status        Int         @db.SmallInt
   voided        Boolean     @default(false)
-  voidReason    String      @db.VarChar(100)
+  voidReason    String?     @db.VarChar(100)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 }
@@ -194,7 +194,7 @@ model PaymentMethod {
   name        String    @db.VarChar(20)
   description String
   voided      Boolean   @default(false)
-  voidReason  String    @db.VarChar(100)
+  voidReason  String?   @db.VarChar(100)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   Payment     Payment[]
@@ -211,7 +211,7 @@ model Payment {
   user            User             @relation(fields: [memberUserId], references: [id])
   createdBy       Int
   voided          Boolean          @default(false)
-  voidReason      String           @db.VarChar(100)
+  voidReason      String?          @db.VarChar(100)
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
   DepositPayment  DepositPayment[]
@@ -227,7 +227,7 @@ model DepositPayment {
   createdBy  Int
   user       User     @relation(fields: [createdBy], references: [id])
   voided     Boolean  @default(false)
-  voidReason String   @db.VarChar(100)
+  voidReason String?  @db.VarChar(100)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
@@ -240,7 +240,7 @@ model LoanPayment {
   createdBy  Int
   user       User     @relation(fields: [createdBy], references: [id])
   voided     Boolean  @default(false)
-  voidReason String   @db.VarChar(100)
+  voidReason String?  @db.VarChar(100)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
@@ -253,7 +253,7 @@ model SharesPayment {
   createdBy  Int
   user       User     @relation(fields: [createdBy], references: [id])
   voided     Boolean  @default(false)
-  voidReason String   @db.VarChar(100)
+  voidReason String?  @db.VarChar(100)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
@@ -262,7 +262,7 @@ model Role {
   id            Int             @id @default(autoincrement())
   name          String          @unique @db.VarChar(15)
   voided        Boolean         @default(false)
-  voidReason    String          @db.VarChar(100)
+  voidReason    String?         @db.VarChar(100)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   RolePrivilege RolePrivilege[]
@@ -274,7 +274,7 @@ model Privilege {
   name          String          @unique @db.VarChar(30)
   description   String          @db.VarChar(300)
   voided        Boolean         @default(false)
-  voidReason    String          @db.VarChar(100)
+  voidReason    String?         @db.VarChar(100)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   RolePrivilege RolePrivilege[]
@@ -287,7 +287,7 @@ model RolePrivilege {
   privilegeId Int
   privilege   Privilege @relation(fields: [privilegeId], references: [id])
   voided      Boolean   @default(false)
-  voidReason  String    @db.VarChar(100)
+  voidReason  String?   @db.VarChar(100)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
@@ -299,7 +299,7 @@ model UserRole {
   roleId     Int
   role       Role     @relation(fields: [roleId], references: [id])
   voided     Boolean  @default(false)
-  voidReason String   @db.VarChar(100)
+  voidReason String?  @db.VarChar(100)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
