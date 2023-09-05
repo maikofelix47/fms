@@ -256,3 +256,36 @@ model SharesPayment {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
+
+model Role {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique @db.VarChar(15)
+  voided        Boolean         @default(false)
+  voidReason    String          @db.VarChar(100)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  RolePrivilege RolePrivilege[]
+}
+
+model Privilege {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique @db.VarChar(30)
+  description   String          @db.VarChar(300)
+  voided        Boolean         @default(false)
+  voidReason    String          @db.VarChar(100)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  RolePrivilege RolePrivilege[]
+}
+
+model RolePrivilege {
+  id          Int       @id @default(autoincrement())
+  roleId      Int
+  role        Role      @relation(fields: [roleId], references: [id])
+  privilegeId Int
+  privilege   Privilege @relation(fields: [privilegeId], references: [id])
+  voided      Boolean   @default(false)
+  voidReason  String    @db.VarChar(100)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
