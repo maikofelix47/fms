@@ -17,8 +17,11 @@ import { FmsPageHeader } from "@/components/fms-page-header";
 import { FmsSelect } from "@/components/fms-select";
 import { getLoanProducts } from "@/app/services/loan-products.service";
 import { LoanProduct } from "@/app/types/loan-product";
+import { useLoanApply } from "@/app/hooks/use-loan-application";
+import { LoanApplicationRequest } from "@/app/types/loan-application";
 function LoanApplicationPage() {
   const [loanProducts, setLoanProducts] = useState<LoanProduct[]>([]);
+  const { apply, error, isLoading, data } = useLoanApply();
   useEffect(() => {
     getLoanProducts().then((p) => {
       setLoanProducts(p);
@@ -47,7 +50,17 @@ function LoanApplicationPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("form submitted", values);
+    const payload: LoanApplicationRequest = {
+      loanProductId: parseInt(values.loanProduct),
+      tenorInMonths: parseInt(values.loanTenor),
+      amount: parseInt(values.amount),
+    };
+    applyForLoan(payload);
+  }
+  function applyForLoan(payload: LoanApplicationRequest) {
+    apply(payload).then((result) => {
+      console.log("result", result);
+    });
   }
   return (
     <div className="loan-application-container flex flex-col">
