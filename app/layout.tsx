@@ -1,4 +1,5 @@
 import "./globals.css";
+import AuthProvider from "./context/auth-provider";
 
 export default function RootLayout({
   children,
@@ -7,7 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

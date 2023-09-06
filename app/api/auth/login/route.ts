@@ -59,19 +59,24 @@ async function isPasswordAmatch(userPassword: string, dbPassword: string) {
 }
 
 async function getUserRoles(userId: number) {
-  const userRoles = await prisma.userRole.findMany({
+  const userRoles = await prisma.user.findFirstOrThrow({
     where: {
-      userId: userId,
+      id: userId,
     },
     select: {
-      role: {
+      email: true,
+      UserRole: {
         select: {
-          name: true,
-          RolePrivilege: {
+          role: {
             select: {
-              privilege: {
+              name: true,
+              RolePrivilege: {
                 select: {
-                  name: true,
+                  privilege: {
+                    select: {
+                      name: true,
+                    },
+                  },
                 },
               },
             },

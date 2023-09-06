@@ -8,14 +8,18 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/ui/form";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { login } from "@/app/services/auth.service";
+import { useLogin } from "@/app/hooks/use-login";
 
 export default function Login() {
+  const { signIn, isLoading, error, isAuthenticated } = useLogin();
+  const router = useRouter();
   const formSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }).min(5),
     password: z.string().min(3),
@@ -29,8 +33,11 @@ export default function Login() {
     },
   });
 
+  if (isAuthenticated) {
+    router.push("/member-dashboard");
+  }
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("form submitted", values);
     userLogin(values.email, values.password);
   }
 
@@ -40,8 +47,7 @@ export default function Login() {
       password,
     };
 
-    const resp = await login(payload);
-    console.log("loginResp", resp);
+    await signIn(email, password);
   }
 
   return (

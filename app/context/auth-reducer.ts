@@ -1,8 +1,5 @@
 "use client";
-interface AuthState {
-  user: string;
-  privileges: any[];
-}
+import { AuthState } from "../types/auth-state";
 interface AuthAction {
   type: string;
   payload: AuthState;
@@ -10,6 +7,9 @@ interface AuthAction {
 export function authReducer(auth: AuthState, action: AuthAction) {
   switch (action.type) {
     case "set_auth": {
+      const newAuth = {
+        ...action.payload,
+      };
       return {
         ...action.payload,
       };
@@ -17,6 +17,7 @@ export function authReducer(auth: AuthState, action: AuthAction) {
     case "reset_auth": {
       return {
         user: "",
+        role: "",
         privileges: [],
       };
     }
