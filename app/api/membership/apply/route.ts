@@ -28,7 +28,15 @@ export async function POST(req: Request) {
         userId: 1,
       },
     });
-    return NextResponse.json(newApplication);
+    return new NextResponse(
+      JSON.stringify({
+        message: "Loan Application was succesfull",
+        data: newApplication,
+      }),
+      {
+        status: 201,
+      }
+    );
   } catch (e) {
     return new NextResponse(
       JSON.stringify({

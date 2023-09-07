@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         message: "Loan Application has been succesfully sent",
       }),
       {
-        status: 200,
+        status: 201,
       }
     );
   } else {

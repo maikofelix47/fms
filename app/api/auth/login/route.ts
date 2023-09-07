@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
 import bcrypt from "bcrypt";
+import { generateJwtToken, verifyToken } from "../../../lib/token";
 
 export async function POST(req: Request) {
   const { email, password } = await req.json();
@@ -30,6 +31,12 @@ export async function POST(req: Request) {
     );
   } else {
     const userRoles = await getUserRoles(user.id);
+    const jwtPayload = {
+      user: {
+        id: user.id,
+      },
+    };
+    const jwt = await generateJwtToken(jwtPayload);
     return new NextResponse(
       JSON.stringify({
         success: true,
