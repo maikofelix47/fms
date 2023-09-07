@@ -9,7 +9,9 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [isAuthenticated, setisAuthenticated] = useState<Boolean>(false);
 
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext) as {
+    dispatch: (authPayload: { type: string; payload: any }) => any;
+  };
 
   const signIn = async (email: string, password: string) => {
     setIsLoading(true);

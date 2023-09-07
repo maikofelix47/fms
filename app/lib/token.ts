@@ -15,6 +15,11 @@ export async function generateJwtToken(payload: any) {
 }
 
 export async function verifyToken(token: string) {
-  const verified = await jwtVerify(token, JWT_SECRET);
-  return verified;
+  try {
+    const verified = await jwtVerify(token, JWT_SECRET);
+    return verified;
+  } catch (e) {
+    console.error("Token Validation Failed", e);
+    return false;
+  }
 }

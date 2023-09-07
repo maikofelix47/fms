@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 
 function Navbar() {
-  const { auth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext) as { auth: { user: string } };
   return (
     <div className="top-0 w-1/1 sticky border-b">
       <div className="nav-container flex h-14 items-center">

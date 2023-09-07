@@ -37,16 +37,25 @@ export async function POST(req: Request) {
       },
     };
     const jwt = await generateJwtToken(jwtPayload);
-    return new NextResponse(
+    const cookieOptins = {
+      name: "fms-token",
+      value: jwt,
+      path: "/",
+      maxAge: 2 * 60 * 60,
+    };
+    const resp = new NextResponse(
       JSON.stringify({
         success: true,
         message: "Suucessfull Login",
         data: userRoles,
+        token: jwt,
       }),
       {
         status: 200,
       }
     );
+    resp.cookies.set(cookieOptins);
+    return resp;
   }
 }
 
