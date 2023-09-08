@@ -11,3 +11,9 @@ export async function apply(payload: MemberApplication) {
 
   return data;
 }
+
+export async function getMembershipRequests() {
+  const resp = await fetch("/api/membership/requests");
+  const data = resp.json();
+  return data;
+}

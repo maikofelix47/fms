@@ -9,6 +9,10 @@ const sideNavItems = [
         url: "apply",
       },
       {
+        title: "Requests",
+        url: "requests",
+      },
+      {
         title: "Shares",
         url: "shares",
       },
@@ -81,7 +85,7 @@ const sideNavItems = [
     ],
   },
 ];
-function SideNav() {
+function FmsSideNav() {
   return (
     <div className="side-nav-container flex flex-col py-4 justify-center">
       {sideNavItems.map((s, index) => {
@@ -115,4 +119,4 @@ function SideNav() {
   );
 }
 
-export default SideNav;
+export { FmsSideNav };

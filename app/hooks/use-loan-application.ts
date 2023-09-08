@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { applyForLoan } from "../services/loan-application";
+import { applyForLoan } from "../services/loan-application.service";
 import { LoanApplicationRequest } from "../types/loan-application";
 
 export const useLoanApply = () => {
