@@ -35,6 +35,10 @@ const sideNavItems = [
         url: "apply",
       },
       {
+        title: "Applications",
+        url: "applications",
+      },
+      {
         title: "Active",
         url: "active-loans",
       },
@@ -86,7 +90,7 @@ function SideNav() {
             <div className="side-nav-title py-2">
               <h4 className="mb-1 text-sm font-semibold">{s.section}</h4>
             </div>
-            <div className="side-nav-items flex flex-row">
+            <div className="side-nav-items flex flex-row" key={index}>
               <ul className="side-nav-list text-sm">
                 {s.navItems.map((item, index) => {
                   return (

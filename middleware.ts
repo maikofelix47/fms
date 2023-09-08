@@ -16,10 +16,13 @@ export async function middleware(request: NextRequest) {
   if (request.cookies.has("fms-token")) {
     token = request.cookies.get("fms-token")?.value;
     const verified = await verifyToken(token as string);
+    const response = NextResponse.next();
     if (!verified) {
       request.nextUrl.pathname = "/auth/login";
       return NextResponse.redirect(request.nextUrl);
     }
+    response.headers.set("X-USER-ID", JSON.stringify(verified?.payload?.user));
+    return response;
   } else {
     request.nextUrl.pathname = "/auth/login";
     return NextResponse.redirect(request.nextUrl);
