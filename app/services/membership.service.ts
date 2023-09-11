@@ -7,13 +7,21 @@ export async function apply(payload: MemberApplication) {
     },
     body: JSON.stringify(payload),
   });
-  const data = await resp.json();
-
-  return data;
+  return resp.json();
 }
 
 export async function getMembershipRequests() {
   const resp = await fetch("/api/membership/requests");
-  const data = resp.json();
+  return resp.json();
+}
+
+export async function getMembershipRequest(id: number) {
+  const resp = await fetch(
+    `http://localhost:3000/api/membership/requests/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
+  const { data } = await resp.json();
   return data;
 }

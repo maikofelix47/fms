@@ -3,12 +3,7 @@ import type { NextRequest } from "next/server";
 import { verifyToken } from "./app/lib/token";
 
 export const config = {
-  matcher: [
-    "/member-dashboard/:path*",
-    "/api/loan/:path*",
-    "/api/membership/:path*",
-    "/api/loan-products/:path*",
-  ],
+  matcher: ["/member-dashboard/:path*", "/api/loan/:path*"],
 };
 
 export async function middleware(request: NextRequest) {

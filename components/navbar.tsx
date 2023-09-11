@@ -41,22 +41,6 @@ function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-              {auth.user && (
-                <NavigationMenuItem>
-                  <Link
-                    href="/member-dashboard/settings"
-                    legacyBehavior
-                    passHref
-                  >
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      {auth.user}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              )}
-
               <NavigationMenuItem>
                 <Link href="/logout" legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>

@@ -11,6 +11,7 @@ export async function GET(req: Request) {
 function getAllMembershipRequests() {
   return prisma.membershipApplication.findMany({
     select: {
+      id: true,
       firstName: true,
       lastName: true,
       nationality: true,

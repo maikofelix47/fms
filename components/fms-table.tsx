@@ -15,7 +15,7 @@ interface FmsTableProps {
 }
 
 function FmsTable({ caption, columns, data }: FmsTableProps) {
-  if (data.length === 0) {
+  if (!data || data.length === 0) {
     return <h2>No Data to display</h2>;
   }
   return (
