@@ -10,7 +10,7 @@ function MemberPersonalDetails({
   requestDetails,
 }: membershipReuqestDetailsProps) {
   return (
-    <>
+    <div className="py-4">
       <h3>Personal Details</h3>
       <Table>
         <TableBody>
@@ -66,7 +66,7 @@ function MemberPersonalDetails({
           </TableRow>
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }
 

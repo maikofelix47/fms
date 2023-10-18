@@ -1,6 +1,9 @@
 import { LoanProduct } from "../types/loan-product";
+import { getApiBaseUrl } from "./config.service";
+
 export async function getLoanProducts(): Promise<LoanProduct[]> {
-  const resp = await fetch("http://localhost:3000/api/loan-products", {
+  const apiUrl = getApiBaseUrl();
+  const resp = await fetch(`${apiUrl}/loan-products`, {
     cache: "no-store",
   });
   const { data } = await resp.json();

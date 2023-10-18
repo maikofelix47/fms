@@ -17,7 +17,7 @@ function MemberEmploymentDetails({
   memberEmploymentDetails,
 }: memberEmploymentDetailsProps) {
   return (
-    <>
+    <div className="py-4">
       <h3>Employment Details</h3>
       <Table>
         <TableBody>
@@ -45,7 +45,7 @@ function MemberEmploymentDetails({
           </TableRow>
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }
 

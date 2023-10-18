@@ -1,7 +1,9 @@
 import { User } from "../types/user";
+import { getApiBaseUrl } from "./config.service";
 
 export async function login(payload: User) {
-  return fetch("/api/auth/login", {
+  const apiUrl = getApiBaseUrl();
+  return fetch(`${apiUrl}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +13,8 @@ export async function login(payload: User) {
 }
 
 export async function signUp(payload: User) {
-  const resp = await fetch("/api/auth/sign-up", {
+  const apiUrl = getApiBaseUrl();
+  const resp = await fetch(`${apiUrl}/auth/sign-up`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

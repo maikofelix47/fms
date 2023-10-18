@@ -1,6 +1,9 @@
 import { LoanApplicationRequest } from "../types/loan-application";
+import { getApiBaseUrl } from "./config.service";
+
 export async function applyForLoan(payload: LoanApplicationRequest) {
-  return fetch("/api/loan/apply", {
+  const apiUrl = getApiBaseUrl();
+  return fetch(`${apiUrl}/loan/apply`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,6 +1,9 @@
 import { MemberApplication } from "../types/member-application";
+import { getApiBaseUrl } from "./config.service";
+
 export async function apply(payload: MemberApplication) {
-  const resp = await fetch("/api/membership/apply", {
+  const apiUrl = getApiBaseUrl();
+  const resp = await fetch(`${apiUrl}/membership/apply`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,17 +14,37 @@ export async function apply(payload: MemberApplication) {
 }
 
 export async function getMembershipRequests() {
-  const resp = await fetch("/api/membership/requests");
+  const apiUrl = getApiBaseUrl();
+  const resp = await fetch(`${apiUrl}/membership/requests`);
   return resp.json();
 }
 
 export async function getMembershipRequest(id: number) {
-  const resp = await fetch(
-    `http://localhost:3000/api/membership/requests/${id}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const apiUrl = getApiBaseUrl();
+  const url = `${apiUrl}/membership/requests/${id}`;
+  const resp = await fetch(url, {
+    cache: "no-store",
+  });
+  const { data } = await resp.json();
+  return data;
+}
+
+export async function approveMembershipRequest(
+  approve: boolean,
+  requestId: number
+) {
+  const apiUrl = getApiBaseUrl();
+  const fullUrl = `${apiUrl}/membership/requests/approval/${requestId}`;
+  const resp = await fetch(fullUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      approve,
+    }),
+  });
+
   const { data } = await resp.json();
   return data;
 }
