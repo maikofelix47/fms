@@ -153,7 +153,7 @@ function MembershipApplicationPage() {
   }
   return (
     <div className="loan-application-container flex flex-col">
-      <FmsPageHeader>Loan Application </FmsPageHeader>
+      <FmsPageHeader>Membership Application </FmsPageHeader>
       <div className="loan-application flex  w-2/3 justify-center">
         <Form {...form}>
           <form
