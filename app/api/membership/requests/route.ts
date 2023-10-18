@@ -1,22 +1,9 @@
-import prisma from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
+import { getAllMembershipRequests } from "@/app/db/membership-requests";
 
 export async function GET(req: Request) {
   const membershipReq = await getAllMembershipRequests();
   return NextResponse.json({
     data: membershipReq,
-  });
-}
-
-function getAllMembershipRequests() {
-  return prisma.membershipApplication.findMany({
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
-      nationality: true,
-      createdAt: true,
-      status: true,
-    },
   });
 }
