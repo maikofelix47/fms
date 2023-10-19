@@ -68,5 +68,8 @@ export function getAllMembershipRequests() {
       createdAt: true,
       status: true,
     },
+    where: {
+      status: 0,
+    },
   });
 }

@@ -13,6 +13,10 @@ const sideNavItems = [
         url: "requests",
       },
       {
+        title: "Approved",
+        url: "approved",
+      },
+      {
         title: "Shares",
         url: "shares",
       },

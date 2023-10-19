@@ -30,7 +30,9 @@ function MemberPersonalDetails({
           </TableRow>
           <TableRow>
             <TableCell>DOB</TableCell>
-            <TableCell>{getYearMonthDate(requestDetails.dob)}</TableCell>
+            <TableCell>
+              {getYearMonthDate(requestDetails.dob.toISOString())}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>Gender</TableCell>

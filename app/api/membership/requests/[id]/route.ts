@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { getMembershipRequesById } from "@/app/db/membership-requests";
-export async function GET(req: Request, { params }: { params: any }) {
+export async function GET(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
   const membershipReq = await getMembershipRequesById(parseInt(id));
   if (!membershipReq) {

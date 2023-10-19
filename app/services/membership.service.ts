@@ -29,6 +29,26 @@ export async function getMembershipRequest(id: number) {
   return data;
 }
 
+export async function getAllApprovedMembers() {
+  const apiUrl = getApiBaseUrl();
+  const url = `${apiUrl}/membership/approved`;
+  const resp = await fetch(url, {
+    cache: "no-store",
+  });
+  const { data } = await resp.json();
+  return data;
+}
+
+export async function getApprovedMemberDetails(id: number) {
+  const apiUrl = getApiBaseUrl();
+  const url = `${apiUrl}/membership/approved/${id}`;
+  const resp = await fetch(url, {
+    cache: "no-store",
+  });
+  const { data } = await resp.json();
+  return data;
+}
+
 export async function approveMembershipRequest(
   approve: boolean,
   requestId: number
