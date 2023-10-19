@@ -7,3 +7,5 @@ export interface EmploymentDetails {
   jobTitle: string;
   grossMonthlyIncome: number;
 }
+
+export type EmploymentDetailsDto = Omit<EmploymentDetails, "id">;

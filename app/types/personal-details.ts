@@ -9,3 +9,5 @@ export interface PersonalDetails {
   gender: string;
   maritalStatus: string;
 }
+
+export type PersonalDetailsDto = Omit<PersonalDetails, "id">;

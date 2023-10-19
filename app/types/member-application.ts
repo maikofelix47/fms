@@ -1,9 +1,11 @@
 export interface MemberApplication {
+  id: number;
+  userId: number;
   firstName: string;
   lastName: string;
   nationalIdNo: number;
   nationality: string;
-  dob: string;
+  dob: Date;
   gender: string;
   maritalStatus: string;
   phoneNo: string;
@@ -14,7 +16,7 @@ export interface MemberApplication {
   employed: boolean;
   selfEmployer: boolean;
   employer: string;
-  dateOfEmployment: string;
+  dateOfEmployment: Date;
   station: string;
   jobTitle: string;
   grossMonthlyIncome: number;

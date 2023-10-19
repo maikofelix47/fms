@@ -1,7 +1,7 @@
 import prisma from "@/app/lib/prisma";
-import { PersonalDetails } from "@/app/types/personal-details";
+import { PersonalDetailsDto } from "@/app/types/personal-details";
 
-export function createPersonalDetails(personalDetails: PersonalDetails) {
+export function createPersonalDetails(personalDetails: PersonalDetailsDto) {
   return prisma.memberPersonalDetail.create({
     data: {
       memberId: personalDetails.memberId,

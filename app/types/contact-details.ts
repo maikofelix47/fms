@@ -7,3 +7,5 @@ export interface ContactDetails {
   estate: string;
   houseNo: string;
 }
+
+export type ContactDetailsDto = Omit<ContactDetails, "id">;

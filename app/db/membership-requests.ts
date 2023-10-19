@@ -36,13 +36,24 @@ export function getMembershipRequesById(id: number) {
   });
 }
 
-export function approveMembershipRequest(approve: boolean, requestId: number) {
+export function approveMembershipRequest(requestId: number) {
   return prisma.membershipApplication.update({
     where: {
       id: requestId,
     },
     data: {
-      status: approve ? 1 : 2,
+      status: 1,
+    },
+  });
+}
+
+export function rejectMembershipRequest(requestId: number) {
+  return prisma.membershipApplication.update({
+    where: {
+      id: requestId,
+    },
+    data: {
+      status: 2,
     },
   });
 }

@@ -1,7 +1,9 @@
 import prisma from "@/app/lib/prisma";
-import { EmploymentDetails } from "@/app/types/employment-details";
+import { EmploymentDetailsDto } from "@/app/types/employment-details";
 
-export function createEmploymentDetails(employmentDetails: EmploymentDetails) {
+export function createEmploymentDetails(
+  employmentDetails: EmploymentDetailsDto
+) {
   return prisma.memberEmploymentDetail.create({
     data: {
       memberId: employmentDetails.memberId,
