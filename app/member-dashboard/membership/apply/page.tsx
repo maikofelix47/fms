@@ -136,21 +136,16 @@ function MembershipApplicationPage() {
   ];
 
   function submitHandler(values: z.infer<typeof formSchema>) {
-    console.log("form submitted", values);
     applyForMembership(values);
   }
   function applyForMembership(payload: any) {
     apply(payload)
-      .then((result) => {
-        console.log("result", result);
-      })
+      .then((result) => {})
       .catch((err) => {
         console.error("error", err);
       });
   }
-  function errorHandler(e: any) {
-    console.log("errorHandler", e);
-  }
+  function errorHandler(e: any) {}
   return (
     <div className="loan-application-container flex flex-col">
       <FmsPageHeader>Membership Application </FmsPageHeader>

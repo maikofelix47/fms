@@ -1,6 +1,6 @@
 import { FmsPageHeader } from "@/components/fms-page-header";
 import { getAllApprovedMembers } from "@/app/services/membership.service";
-import MembersList from "@/components/member-list";
+import MembersList from "@/components/member/member-list";
 import { Member } from "../../../types/member";
 
 async function MembersListPage() {

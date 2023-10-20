@@ -6,9 +6,9 @@ import {
 } from "@/app/services/membership.service";
 import { FmsPageHeader } from "@/components/fms-page-header";
 import { MemberApplication } from "../../../../types/member-application";
-import MemberPersonalDetails from "@/components/member-personal-details";
-import MemberEmploymentDetails from "@/components/member-employment-details";
+import MemberDetails from "@/components/member/member-details";
 import { Button } from "@/components/ui/button";
+import { MemberDetailsProps } from "@/app/types/member-details";
 interface MembershipRequestProps {
   params: {
     id: string;
@@ -29,16 +29,29 @@ function MembershipRequestPage({ params }: MembershipRequestProps) {
     return <h2>Loading data...</h2>;
   }
 
+  const memberDetails: MemberDetailsProps = {
+    personalDetails: [{ ...mR }],
+    contactDetails: [
+      {
+        ...mR,
+      },
+    ],
+    employmentDetails: [
+      {
+        ...mR,
+      },
+    ],
+  };
+
   function approveRequest(approval: boolean) {
     approveMembershipRequest(approval, parseInt(id));
   }
 
+
   return (
     <>
       <FmsPageHeader>Membership Request Details</FmsPageHeader>
-      <MemberPersonalDetails requestDetails={mR} />
-      {mR.employed && <MemberEmploymentDetails memberEmploymentDetails={mR} />}
-
+      <MemberDetails memberDetails={memberDetails} />
       <div className="py-4">
         <Button variant="destructive" onClick={() => approveRequest(false)}>
           Reject

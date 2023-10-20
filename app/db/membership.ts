@@ -39,6 +39,26 @@ export function getApprovedMember(id: number) {
           firstName: true,
           lastName: true,
           nationality: true,
+          nationalIdNo: true,
+          gender: true,
+        },
+      },
+      MemberContactDetail: {
+        select: {
+          phoneNo: true,
+          estate: true,
+          houseNo: true,
+          countryOfResidence: true,
+          countyOfResidence: true,
+        },
+      },
+      MemberEmploymentDetail: {
+        select: {
+          employer: true,
+          jobTitle: true,
+          dateOfEmployment: true,
+          grossMonthlyIncome: true,
+          station: true,
         },
       },
       createdAt: true,

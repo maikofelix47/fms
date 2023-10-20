@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { FmsPageHeader } from "@/components/fms-page-header";
-import MembersList from "@/components/member-list";
+import MembersList from "@/components/member/member-list";
 import { getMembershipRequests } from "@/app/services/membership.service";
 interface MemberRequest {
   id: number;

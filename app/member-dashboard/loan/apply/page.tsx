@@ -58,9 +58,7 @@ function LoanApplicationPage() {
     applyForLoan(payload);
   }
   function applyForLoan(payload: LoanApplicationRequest) {
-    apply(payload).then((result) => {
-      console.log("result", result);
-    });
+    apply(payload).then((result) => {});
   }
   return (
     <div className="loan-application-container flex flex-col">

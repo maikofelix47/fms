@@ -23,13 +23,13 @@ interface MembersListProps {
   membershipList: MemberList[];
 }
 
-type viewUrl = "request" | "approved";
+type viewUrl = "requests" | "approved";
 
 function MembersList({ membershipList }: MembersListProps) {
   function getViewUrl(status: number): viewUrl {
-    let url: viewUrl = "request";
+    let url: viewUrl = "requests";
     if (status === 0) {
-      url = "request";
+      url = "requests";
     }
     if (status === 1) {
       url = "approved";

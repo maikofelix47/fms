@@ -29,7 +29,6 @@ export default function SignUp() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("form submitted", values);
     signupUser(values.email, values.password);
   }
 
@@ -40,7 +39,6 @@ export default function SignUp() {
     };
 
     const resp = await signUp(payload);
-    console.log("signupResp", resp);
   }
 
   return (

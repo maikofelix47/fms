@@ -9,9 +9,7 @@ function LoanApplicationsPage() {
       .then((result) => {
         return result.json();
       })
-      .then((result) => {
-        console.log("result", result);
-      });
+      .then((result) => {});
   }, []);
   const columns = ["Application Date", "Amount", "Loan Product", " Status"];
   const data = [
