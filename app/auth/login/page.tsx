@@ -14,7 +14,6 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { login } from "@/app/services/auth.service";
 import { useLogin } from "@/app/hooks/use-login";
 
 export default function Login() {
