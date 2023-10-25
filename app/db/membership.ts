@@ -65,3 +65,14 @@ export function getApprovedMember(id: number) {
     },
   });
 }
+
+export async function getMemberIdByUserId(userId: number) {
+  return prisma.member.findFirstOrThrow({
+    where: {
+      userId: userId,
+    },
+    select: {
+      id: true,
+    },
+  });
+}

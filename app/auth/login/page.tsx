@@ -15,9 +15,9 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useLogin } from "@/app/hooks/use-login";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Login() {
-  const { signIn, isLoading, error, isAuthenticated } = useLogin();
   const router = useRouter();
   const formSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }).min(5),
@@ -32,10 +32,6 @@ export default function Login() {
     },
   });
 
-  if (isAuthenticated) {
-    router.push("/member-dashboard");
-  }
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     userLogin(values.email, values.password);
   }
@@ -46,7 +42,17 @@ export default function Login() {
       password,
     };
 
-    await signIn(email, password);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: email,
+      password: password,
+    });
+    console.log({ result });
+    if (result?.ok) {
+      if (result.status === 200) {
+        router.push("/member-dashboard");
+      }
+    }
   }
 
   return (
