@@ -2,22 +2,20 @@
 
 ## The project consists of the following
 
-- NextJs v13+
-- Prisma ORM
-- Shadcdn/ui
-- Tailwind css
-- Mongodb
-- Jest
-- Cypress
-- NextAuth
-- Node v16+
-- Typescript v4.9.5+
+- NextJs v14+
+- Prisma ORM v5+
+- Shadcn/ui
+- Tailwind css v3+
+- PostgreSQL v15
+- NextAuth v4
+- Node v20+
+- Typescript v5+
 
 ### Set Up
 
 Run the following command:
 
-1. Fork the project
+1. Fork the project and clone it.
 2. Navigate into the project and run
 
 ```sh
@@ -36,7 +34,7 @@ npx prisma migrate dev
 npm run dev
 ```
 
-5. Navigate to `http://localhost:3000`
+5. Navigate to `http://localhost:3000/auth/login`
 
 ### Build
 
