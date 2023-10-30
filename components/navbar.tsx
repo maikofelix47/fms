@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 function Navbar() {
   const { data: session, status } = useSession();
@@ -26,30 +26,46 @@ function Navbar() {
               </NavigationMenuItem>
             </div>
             <div className="right-navs flex justify-end">
-              <NavigationMenuItem>
-                <Link href="/member-dashboard/profile" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Profile
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/member-dashboard/settings" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Settings
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
               {status === "authenticated" && (
-                <NavigationMenuItem>
-                  <Link href="/logout" legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
+                <>
+                  <NavigationMenuItem>
+                    <Link
+                      href="/member-dashboard/profile"
+                      legacyBehavior
+                      passHref
                     >
-                      Logout
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
+                      <NavigationMenuLink
+                        className={navigationMenuTriggerStyle()}
+                      >
+                        Profile
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <Link
+                      href="/member-dashboard/settings"
+                      legacyBehavior
+                      passHref
+                    >
+                      <NavigationMenuLink
+                        className={navigationMenuTriggerStyle()}
+                      >
+                        Settings
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link href="" legacyBehavior passHref>
+                      <NavigationMenuLink
+                        className={navigationMenuTriggerStyle()}
+                        onClick={() => signOut()}
+                      >
+                        Logout
+                      </NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+                </>
               )}
 
               {status === "unauthenticated" && (
