@@ -5,6 +5,7 @@ const nextConfig = (phase) => {
     env: {
       DATABASE_URL: process.env.DATABASE_URL,
       API_URL: process.env.API_URL,
+      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     },
     webpack: (config) => {
       config.externals = [...config.externals, "bcrypt"];
