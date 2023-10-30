@@ -6,6 +6,10 @@ const nextConfig = (phase) => {
       DATABASE_URL: process.env.DATABASE_URL,
       API_URL: process.env.API_URL,
     },
+    webpack: (config) => {
+      config.externals = [...config.externals, "bcrypt"];
+      return config;
+    },
   };
 };
 

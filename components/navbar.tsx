@@ -1,6 +1,4 @@
 "use client";
-import { useContext } from "react";
-import { AuthContext } from "@/app/context/auth-context";
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -9,9 +7,10 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { useSession } from "next-auth/react";
 
 function Navbar() {
-  const { auth } = useContext(AuthContext) as { auth: { user: string } };
+  const { data: session, status } = useSession();
   return (
     <div className="top-0 w-1/1 sticky border-b">
       <div className="nav-container flex h-14 items-center">
@@ -41,13 +40,29 @@ function Navbar() {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/logout" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Logout
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
+              {status === "authenticated" && (
+                <NavigationMenuItem>
+                  <Link href="/logout" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      Logout
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              )}
+
+              {status === "unauthenticated" && (
+                <NavigationMenuItem>
+                  <Link href="/auth/login" legacyBehavior passHref>
+                    <NavigationMenuLink
+                      className={navigationMenuTriggerStyle()}
+                    >
+                      Login
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+              )}
             </div>
           </NavigationMenuList>
         </NavigationMenu>

@@ -1,5 +1,6 @@
+"use client";
 import "./globals.css";
-import AuthProvider from "./context/auth-provider";
+import NextAuthProvider from "./context/next-auth-provider";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <AuthProvider>{children}</AuthProvider>
+        <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>
   );
