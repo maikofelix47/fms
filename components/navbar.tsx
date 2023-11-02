@@ -54,6 +54,17 @@ function Navbar() {
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
+                  {session.user && (
+                    <NavigationMenuItem>
+                      <Link href="" legacyBehavior passHref>
+                        <NavigationMenuLink
+                          className={navigationMenuTriggerStyle()}
+                        >
+                          {session.user?.name}
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  )}
 
                   <NavigationMenuItem>
                     <Link href="" legacyBehavior passHref>
