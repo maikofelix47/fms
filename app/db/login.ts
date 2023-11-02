@@ -5,21 +5,29 @@ import bcrypt from "bcrypt";
 
 export async function login(email: string, password: string) {
   const user = await getUserByEmail(email);
+  let memberId = null;
   if (!user) {
     throw new Error("User not Found");
   }
   const passwordMatch = await isPasswordAmatch(password, user.password);
   if (!passwordMatch) {
-    throw new Error("Ussername or password doesn't match");
+    throw new Error("Username or password doesn't match");
   }
 
   const userRoles = await getUserRoles(user.id);
-  const memberId = await getMemberIdByUserId(user.id);
+  try {
+    const member = await getMemberIdByUserId(user.id);
+    if (member) {
+      memberId = member.id;
+    }
+  } catch (e) {
+    console.error(e);
+  }
 
   return {
     user,
     userRoles,
-    memberId: memberId || null,
+    memberId: memberId,
   };
 }
 

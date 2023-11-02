@@ -29,7 +29,14 @@ export const authOptions = {
   ],
   callbacks: {
     async session({ session }: { session: any }) {
-      const user = await getUserByEmail(session.email);
+      if (
+        !session.user.email ||
+        session.user.email === "" ||
+        session.user.email === null
+      ) {
+        return;
+      }
+      const user = await getUserByEmail(session.user.email);
       if (!user) {
         return;
       }
@@ -41,7 +48,7 @@ export const authOptions = {
           ...session.user,
         },
         member: {
-          id: member.id || null,
+          id: member ? member.id : null,
         },
       };
     },

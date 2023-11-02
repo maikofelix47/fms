@@ -4,5 +4,10 @@ export function getUserByEmail(email: string) {
     where: {
       email: email,
     },
+    select: {
+      id: true,
+      email: true,
+      password: true,
+    },
   });
 }

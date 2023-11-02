@@ -23,7 +23,7 @@ export function createMembershipRequest(body: any) {
       station: body.station,
       jobTitle: body.jobTitle,
       grossMonthlyIncome: parseInt(body.grossMonthlyIncome),
-      userId: 1, //placeholder value
+      userId: body.userId,
     },
   });
 }

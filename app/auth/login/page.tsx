@@ -14,8 +14,7 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useLogin } from "@/app/hooks/use-login";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   const router = useRouter();
@@ -47,7 +46,6 @@ export default function Login() {
       email: email,
       password: password,
     });
-    console.log({ result });
     if (result?.ok) {
       if (result.status === 200) {
         router.push("/member-dashboard");

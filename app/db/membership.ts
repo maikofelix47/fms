@@ -67,7 +67,7 @@ export function getApprovedMember(id: number) {
 }
 
 export async function getMemberIdByUserId(userId: number) {
-  return prisma.member.findFirstOrThrow({
+  return prisma.member.findFirst({
     where: {
       userId: userId,
     },
