@@ -4,7 +4,7 @@ import { MembershipRequestStatusCodes } from "../../../types/member-application"
 
 export async function GET(req: NextRequest) {
   const membershipReq = await getAllMembershipRequests(
-    MembershipRequestStatusCodes.request
+    MembershipRequestStatusCodes.rejected
   );
   return NextResponse.json({
     data: membershipReq,

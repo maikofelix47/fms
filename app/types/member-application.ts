@@ -20,4 +20,17 @@ export interface MemberApplication {
   station: string;
   jobTitle: string;
   grossMonthlyIncome: number;
+  createdAt: string;
+  status: string;
+}
+
+export type MemberRequestSummary = Pick<
+  MemberApplication,
+  "id" | "firstName" | "lastName" | "createdAt" | "nationality" | "status"
+>;
+
+export enum MembershipRequestStatusCodes {
+  "request" = 0,
+  "approved" = 1,
+  "rejected" = 2,
 }

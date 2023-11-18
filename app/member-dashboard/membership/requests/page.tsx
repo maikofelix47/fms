@@ -1,29 +1,10 @@
-"use client";
-import { useEffect, useState } from "react";
 import { FmsPageHeader } from "@/components/fms-page-header";
 import MembersList from "@/components/member/member-list";
 import { getMembershipRequests } from "@/app/services/membership.service";
-interface MemberRequest {
-  id: number;
-  createdAt: string;
-  firstName: string;
-  lastName: string;
-  nationality: string;
-  status: string;
-}
-function MembershipRequestsPage() {
-  const [membershipReqs, setMembershipReqs] = useState<MemberRequest[]>([]);
-  useEffect(() => {
-    getMembershipRequests()
-      .then((result) => {
-        const { data } = result;
-        setMembershipReqs(data);
-      })
-      .catch((e) => {
-        console.log("error", e);
-      });
-  }, []);
+import { MemberRequestSummary } from "@/app/types/member-application";
 
+async function MembershipRequestsPage() {
+  const membershipReqs: MemberRequestSummary[] = await getMembershipRequests();
   return (
     <>
       <FmsPageHeader>Membership Requests</FmsPageHeader>

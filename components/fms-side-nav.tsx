@@ -17,6 +17,10 @@ const sideNavItems = [
         url: "approved",
       },
       {
+        title: "Rejected",
+        url: "rejected",
+      },
+      {
         title: "Shares",
         url: "shares",
       },

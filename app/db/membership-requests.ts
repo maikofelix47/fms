@@ -1,4 +1,5 @@
 import prisma from "@/app/lib/prisma";
+import { MembershipRequestStatusCodes } from "../types/member-application";
 
 export function createMembershipRequest(body: any) {
   return prisma.membershipApplication.create({
@@ -58,7 +59,7 @@ export function rejectMembershipRequest(requestId: number) {
   });
 }
 
-export function getAllMembershipRequests() {
+export function getAllMembershipRequests(status: MembershipRequestStatusCodes) {
   return prisma.membershipApplication.findMany({
     select: {
       id: true,
@@ -69,7 +70,7 @@ export function getAllMembershipRequests() {
       status: true,
     },
     where: {
-      status: 0,
+      status: status,
     },
   });
 }

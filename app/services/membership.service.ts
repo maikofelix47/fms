@@ -16,7 +16,8 @@ export async function apply(payload: MemberApplication) {
 export async function getMembershipRequests() {
   const apiUrl = getApiBaseUrl();
   const resp = await fetch(`${apiUrl}/membership/requests`);
-  return resp.json();
+  const { data } = await resp.json();
+  return data;
 }
 
 export async function getMembershipRequest(id: number) {
@@ -32,6 +33,16 @@ export async function getMembershipRequest(id: number) {
 export async function getAllApprovedMembers() {
   const apiUrl = getApiBaseUrl();
   const url = `${apiUrl}/membership/approved`;
+  const resp = await fetch(url, {
+    cache: "no-store",
+  });
+  const { data } = await resp.json();
+  return data;
+}
+
+export async function getAllRejectedMembers() {
+  const apiUrl = getApiBaseUrl();
+  const url = `${apiUrl}/membership/rejected`;
   const resp = await fetch(url, {
     cache: "no-store",
   });

@@ -1,14 +1,14 @@
 import { FmsPageHeader } from "@/components/fms-page-header";
-import { getAllApprovedMembers } from "@/app/services/membership.service";
+import { getAllRejectedMembers } from "@/app/services/membership.service";
 import MembersList from "@/components/member/member-list";
 import { MemberRequestSummary } from "../../../types/member-application";
 
 async function MembersListPage() {
-  const approvedReqs: MemberRequestSummary[] = await getAllApprovedMembers();
+  const members: MemberRequestSummary[] = await getAllRejectedMembers();
   return (
     <>
-      <FmsPageHeader>Approved Members</FmsPageHeader>
-      <MembersList membershipList={approvedReqs} />
+      <FmsPageHeader>Rejected Members</FmsPageHeader>
+      <MembersList membershipList={members} />
     </>
   );
 }
