@@ -2,12 +2,11 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const config = {
-  matcher: ["/member-dashboard/:path*", "/api/loan/:path*"],
+  matcher: ["/member-dashboard/:path*"],
 };
 
 export async function middleware(request: NextRequest) {
   let token: string | undefined;
-
   if (request.cookies.has("next-auth.session-token")) {
     token = request.cookies.get("next-auth.session-token")?.value;
     if (token) {

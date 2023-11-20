@@ -1,13 +1,17 @@
 import { NextResponse } from "next/server";
-import prisma from "@/app/lib/prisma";
+import { getLoanApplications } from "@/app/db/loan";
 
 export async function GET(req: Request) {
   try {
     const loanApplications = await getLoanApplications();
-    return NextResponse.json({
-      message: "Loan Applications",
-      data: loanApplications,
-    });
+    return new NextResponse(
+      JSON.stringify({
+        data: loanApplications,
+      }),
+      {
+        status: 200,
+      }
+    );
   } catch (e) {
     return new NextResponse(
       JSON.stringify({
@@ -18,21 +22,4 @@ export async function GET(req: Request) {
       }
     );
   }
-}
-
-async function getLoanApplications() {
-  const loanApplications = await prisma.loanApplication.findMany({
-    select: {
-      memberId: true,
-      amount: true,
-      loanProduct: {
-        select: {
-          name: true,
-        },
-      },
-      tenorInMonths: true,
-      status: true,
-    },
-  });
-  return loanApplications;
 }

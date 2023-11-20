@@ -10,7 +10,6 @@ interface LoanApplication {
   tenorInMonths: number;
   status: number;
   createdAt: Date;
-  updatedAt: Date;
 }
 
 export type LoanApplicationRequestDto = Pick<
@@ -22,3 +21,10 @@ export interface LoanApplicationRequestPayload
   extends LoanApplicationRequestDto {
   memberId: string;
 }
+
+export type LoanApplicationRequestSummary = Omit<
+  LoanApplication,
+  "member" | "loanProductId"
+>;
+
+export type LoanApplicationRequestStatus = "Request" | "Approved" | "Denied";
