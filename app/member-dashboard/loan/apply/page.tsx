@@ -18,7 +18,7 @@ import { FmsSelect } from "@/components/fms-select";
 import { getLoanProducts } from "@/app/services/loan-products.service";
 import { LoanProduct } from "@/app/types/loan-product";
 import { useLoanApply } from "@/app/hooks/use-loan-application";
-import { LoanApplicationRequest } from "@/app/types/loan-application";
+import { LoanApplicationRequestDto } from "@/app/types/loan-application";
 function LoanApplicationPage() {
   const [loanProducts, setLoanProducts] = useState<LoanProduct[]>([]);
   const { apply, error, isLoading, data } = useLoanApply();
@@ -50,14 +50,14 @@ function LoanApplicationPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const payload: LoanApplicationRequest = {
+    const payload: LoanApplicationRequestDto = {
       loanProductId: parseInt(values.loanProduct),
       tenorInMonths: parseInt(values.loanTenor),
       amount: parseInt(values.amount),
     };
     applyForLoan(payload);
   }
-  function applyForLoan(payload: LoanApplicationRequest) {
+  function applyForLoan(payload: LoanApplicationRequestDto) {
     apply(payload).then((result) => {});
   }
   return (

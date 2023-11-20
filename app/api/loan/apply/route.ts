@@ -1,22 +1,37 @@
 import { NextResponse } from "next/server";
-import prisma from "@/app/lib/prisma";
+import { createLoanRequest } from "@/app/db/loan";
+import {
+  LoanApplicationRequestDto,
+  LoanApplicationRequestPayload,
+} from "@/app/types/loan-application";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/lib/next-auth-options";
 
-export async function POST(req: Request) {
-  const body = await req.json();
+export async function POST(req: Request, res: Response) {
+  const body: LoanApplicationRequestDto = await req.json();
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return new NextResponse(
+      JSON.stringify({
+        message: "Auauthorized",
+      }),
+      {
+        status: 401,
+      }
+    );
+  }
+
+  const { member } = session;
+  const loanRequestPayload: LoanApplicationRequestPayload = {
+    ...body,
+    memberId: member.id,
+  };
   try {
-    const newLoanApplication = await prisma.loanApplication.create({
-      data: {
-        memberId: parseInt(body.memberId),
-        loanProductId: parseInt(body.loanProductId),
-        amount: parseInt(body.amount),
-        tenorInMonths: parseInt(body.tenorInMonths),
-        status: 0,
-      },
-    });
+    const newLoanApplication = await createLoanRequest(loanRequestPayload);
     if (newLoanApplication) {
       return new NextResponse(
         JSON.stringify({
-          message: "Loan Application has been succesfully sent",
+          message: "Loan Application Request was successfull",
         }),
         {
           status: 201,

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { applyForLoan } from "../services/loan-application.service";
-import { LoanApplicationRequest } from "../types/loan-application";
+import { LoanApplicationRequestDto } from "../types/loan-application";
 
 export const useLoanApply = () => {
   const [error, setError] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [data, setData] = useState<any>(null);
-  const apply = async (payload: LoanApplicationRequest) => {
+  const apply = async (payload: LoanApplicationRequestDto) => {
     setError(null);
     setIsLoading(true);
     const resp = await applyForLoan(payload);
